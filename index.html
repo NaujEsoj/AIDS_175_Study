@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HIV Treatment Decision Support System</title>
+    <link rel="stylesheet" href="./style/main.css">
+  </head>
+  <body>
+    <form id="predictionForm">
+      <label for="time">Time:</label>
+      <input type="number" id="time" name="time"><br>
+  
+      <label for="trt">Treatment (trt):</label>
+      <input type="number" id="trt" name="trt"><br>
+  
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age"><br>
+  
+      <label for="wtkg">Weight (wtkg):</label>
+      <input type="number" id="wtkg" name="wtkg"><br>
+  
+      <label for="hemo">Hemoglobin (hemo):</label>
+      <input type="number" id="hemo" name="hemo"><br>
+  
+      <label for="homo">Homosapiens (homo):</label>
+      <input type="number" id="homo" name="homo"><br>
+  
+      <label for="drugs">Drugs:</label>
+      <input type="number" id="drugs" name="drugs"><br>
+  
+      <label for="race">Race:</label>
+      <input type="number" id="race" name="race"><br>
+  
+      <label for="gender">Gender:</label>
+      <input type="number" id="gender" name="gender"><br>
+  
+      <label for="str2">Stratum (str2):</label>
+      <input type="number" id="str2" name="str2"><br>
+  
+      <label for="treat">Treatment (treat):</label>
+      <input type="number" id="treat" name="treat"><br>
+  
+      <label for="offtrt">Off Treatment (offtrt):</label>
+      <input type="number" id="offtrt" name="offtrt"><br>
+  
+      <label for="cd40">CD4 count at time 0 (cd40):</label>
+      <input type="number" id="cd40" name="cd40"><br>
+  
+      <label for="cd420">CD4 count at time 20 (cd420):</label>
+      <input type="number" id="cd420" name="cd420"><br>
+  
+      <label for="cd80">CD8 count at time 0 (cd80):</label>
+      <input type="number" id="cd80" name="cd80"><br>
+  
+      <label for="cd820">CD8 count at time 20 (cd820):</label>
+      <input type="number" id="cd820" name="cd820"><br>
+  
+      <label for="karnof">Karnofsky Score (karnof):</label>
+      <input type="number" id="karnof" name="karnof"><br>
+  
+      <button type="button" onclick="makePrediction()">Submit</button>
+  </form>
+  
+  <div id="predictionResult"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
