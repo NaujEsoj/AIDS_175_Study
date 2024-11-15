@@ -3,63 +3,88 @@
 <head>
     <title>HIV Treatment Decision Support System</title>
     <link rel="stylesheet" href="./style/main.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   </head>
   <body>
+    <div>
+      <h1>HIV Treatment Decision Support System</h1>
+    </div>
     <form id="predictionForm">
-      <label for="time">Time:</label>
-      <input type="number" id="time" name="time"><br>
-  
-      <label for="trt">Treatment (trt):</label>
-      <input type="number" id="trt" name="trt"><br>
-  
-      <label for="age">Age:</label>
-      <input type="number" id="age" name="age"><br>
-  
-      <label for="wtkg">Weight (wtkg):</label>
-      <input type="number" id="wtkg" name="wtkg"><br>
-  
-      <label for="hemo">Hemoglobin (hemo):</label>
-      <input type="number" id="hemo" name="hemo"><br>
-  
-      <label for="homo">Homosapiens (homo):</label>
-      <input type="number" id="homo" name="homo"><br>
-  
-      <label for="drugs">Drugs:</label>
-      <input type="number" id="drugs" name="drugs"><br>
-  
-      <label for="race">Race:</label>
-      <input type="number" id="race" name="race"><br>
-  
-      <label for="gender">Gender:</label>
-      <input type="number" id="gender" name="gender"><br>
-  
-      <label for="str2">Stratum (str2):</label>
-      <input type="number" id="str2" name="str2"><br>
-  
-      <label for="treat">Treatment (treat):</label>
-      <input type="number" id="treat" name="treat"><br>
-  
-      <label for="offtrt">Off Treatment (offtrt):</label>
-      <input type="number" id="offtrt" name="offtrt"><br>
-  
-      <label for="cd40">CD4 count at time 0 (cd40):</label>
-      <input type="number" id="cd40" name="cd40"><br>
-  
-      <label for="cd420">CD4 count at time 20 (cd420):</label>
-      <input type="number" id="cd420" name="cd420"><br>
-  
-      <label for="cd80">CD8 count at time 0 (cd80):</label>
-      <input type="number" id="cd80" name="cd80"><br>
-  
-      <label for="cd820">CD8 count at time 20 (cd820):</label>
-      <input type="number" id="cd820" name="cd820"><br>
-  
-      <label for="karnof">Karnofsky Score (karnof):</label>
-      <input type="number" id="karnof" name="karnof"><br>
-  
+      <div class="input-group">
+        <label for="trt">Treatment indicator:</label>
+        <select id="trt" name="trt">
+          <option value="0">ZDV only</option>
+          <option value="1">ZDV + ddI</option>
+          <option value="2">ZDV + Za</option>
+          <option value="3">ddI only</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age">
+      </div>
+      <div class="input-group">
+        <label for="wtkg">Weight (wtkg):</label>
+        <input type="number" id="wtkg" name="wtkg">
+      </div>
+      <div class="input-group">
+        <label for="hemo">Hemoglobin (hemo):</label>
+        <input type="number" id="hemo" name="hemo">
+      </div>
+      <div class="input-group">
+        <label for="homo">Homosapiens (homo):</label>
+        <input type="number" id="homo" name="homo">
+      </div>
+      <div class="input-group">
+        <label for="drugs">Drugs:</label>
+        <input type="number" id="drugs" name="drugs">
+      </div>
+      <div class="input-group">
+        <label for="race">Race:</label>
+        <input type="number" id="race" name="race">
+      </div>
+      <div class="input-group">
+        <label for="gender">Gender:</label>
+        <input type="number" id="gender" name="gender">
+      </div>
+      <div class="input-group">
+        <label for="str2">Stratum (str2):</label>
+        <input type="number" id="str2" name="str2">
+      </div>
+      <div class="input-group">
+        <label for="treat">Treatment (treat):</label>
+        <input type="number" id="treat" name="treat">
+      </div>
+      <div class="input-group">
+        <label for="offtrt">Off Treatment (offtrt):</label>
+        <input type="number" id="offtrt" name="offtrt">
+      </div>
+      <div class="input-group">
+        <label for="cd40">CD4 count at time 0 (cd40):</label>
+        <input type="number" id="cd40" name="cd40">
+      </div>
+      <div class="input-group">
+        <label for="cd420">CD4 count at time 20 (cd420):</label>
+        <input type="number" id="cd420" name="cd420">
+      </div>
+      <div class="input-group">
+        <label for="cd80">CD8 count at time 0 (cd80):</label>
+        <input type="number" id="cd80" name="cd80">
+      </div>
+      <div class="input-group">
+        <label for="cd820">CD8 count at time 20 (cd820):</label>
+        <input type="number" id="cd820" name="cd820">
+      </div>
+      <div class="input-group">
+        <label for="karnof">Karnofsky Score (karnof):</label>
+        <input type="number" id="karnof" name="karnof">
+      </div>
       <button type="button" onclick="makePrediction()">Submit</button>
   </form>
-  
+
   <div id="predictionResult"></div>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
   <script src="./js/main.js"></script>

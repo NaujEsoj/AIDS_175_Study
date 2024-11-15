@@ -3,44 +3,44 @@ async function loadModel() {
     return model;
 }
 
-
-
 async function makePrediction() {
-    const model = await loadModel();
+    try {
+        const model = await loadModel();
 
-    console.log('1');
-    
+        // Collect form data
+        const inputs = [
+            'time', 'trt', 'age', 'wtkg', 'hemo', 'homo', 'drugs',
+            'race', 'gender', 'str2', 'treat', 'offtrt', 'cd40',
+            'cd420', 'cd80', 'cd820', 'karnof'
+        ].map(id => parseFloat(document.getElementById(id).value));
 
-    // Collect form data
-    const inputs = [
-      parseFloat(document.getElementById("time").value),
-      parseFloat(document.getElementById("trt").value),
-      parseFloat(document.getElementById("age").value),
-      parseFloat(document.getElementById("wtkg").value),
-      parseFloat(document.getElementById("hemo").value),
-      parseFloat(document.getElementById("homo").value),
-      parseFloat(document.getElementById("drugs").value),
-      parseFloat(document.getElementById("race").value),
-      parseFloat(document.getElementById("gender").value),
-      parseFloat(document.getElementById("str2").value),
-      parseFloat(document.getElementById("treat").value),
-      parseFloat(document.getElementById("offtrt").value),
-      parseFloat(document.getElementById("cd40").value),
-      parseFloat(document.getElementById("cd420").value),
-      parseFloat(document.getElementById("cd80").value),
-      parseFloat(document.getElementById("cd820").value),
-      parseFloat(document.getElementById("karnof").value)
-  ];
+        // Convert inputs to tensor and make prediction
+        const inputTensor = tf.tensor([inputs]);
+        const prediction = model.predict(inputTensor);
+        const probabilities = await prediction.data();
+        const rawProbability = probabilities[0];
 
-  console.log(inputs);
-  
+        // Calculate survival percentage
+        const survivalPercentage = (rawProbability * 100).toFixed(2);
 
-    // Convert inputs to a tensor and make prediction
-    const inputTensor = tf.tensor([inputs]);
-    const prediction = model.predict(inputTensor);
+        // Display results
+        document.getElementById("predictionResult").innerHTML = `
+            <div class="mt-4 p-4 bg-gray-100 rounded">
+                <h3>Prediction Results:</h3>
+                <p class="text-lg"><strong>Survival Probability:</strong> ${survivalPercentage}%</p>
+            </div>
+        `;
 
-    // Display prediction result
-    prediction.array().then(pred => {
-        document.getElementById("predictionResult").innerText = "Prediction: " + pred[0];
-    });
+        // Cleanup
+        inputTensor.dispose();
+        prediction.dispose();
+
+    } catch (error) {
+        console.error('Prediction error:', error);
+        document.getElementById("predictionResult").innerHTML = `
+            <div class="p-4 bg-red-100 text-red-700">
+                Error making prediction. Please check your inputs and try again.
+            </div>
+        `;
+    }
 }
