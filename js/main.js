@@ -52,13 +52,19 @@ async function makePrediction() {
         // Calculate survival percentage
         const survivalPercentage = (rawProbability * 100).toFixed(2);
 
-        // Display results
-        document.getElementById("predictionResult").innerHTML = `
+        if (isNaN(survivalPercentage)) {
+          alert('por favor introcuce todos los parametros');
+        } else {
+          console.log(survivalPercentage, 'survivalPercentage');
+
+          // Display results
+          document.getElementById("predictionResult").innerHTML = `
             <div class="mt-4 p-4 bg-gray-100 rounded">
                 <h3>Prediction Results:</h3>
                 <p class="text-lg"><strong>Survival Probability:</strong> ${survivalPercentage}%</p>
             </div>
-        `;
+          `;
+        };
 
         // Cleanup
         tensorInput.dispose();
