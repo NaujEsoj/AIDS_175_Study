@@ -8,24 +8,44 @@ async function makePrediction() {
     try {
         const model = await loadModel();
 
-        // Collect form data
-        const inputs = [
-            'trt', 'age', 'wtkg', 'hemo', 'homo', 'drugs',
+                // Using your input format:
+        const inputs = ['trt', 'age', 'wtkg', 'hemo', 'homo', 'drugs',
             'race', 'gender', 'str2', 'treat', 'offtrt', 'cd40',
-            'cd420', 'cd80', 'cd820', 'karnof'
-        ].map(id => parseFloat(document.getElementById(id).value));
+            'cd420', 'cd80', 'cd820', 'karnof']
+            .map(id => parseFloat(document.getElementById(id).value));
 
 
-        function normalizeData(inputs) {
-            const min = Math.min(...inputs);
-            const max = Math.max(...inputs);
-            return inputs.map(value => (value - min) / (max - min));
-        }
+            const normalizationParams = {
+                'trt': { min: 0.0, max: 3.0 },
+                'age': { min: 12.0, max: 70.0 },
+                'wtkg': { min: 31.0, max: 159.93936 },
+                'hemo': { min: 0.0, max: 1.0 },
+                'homo': { min: 0.0, max: 1.0 },
+                'drugs': { min: 0.0, max: 1.0 },
+                'race': { min: 0.0, max: 1.0 },
+                'gender': { min: 0.0, max: 1.0 },
+                'str2': { min: 0.0, max: 1.0 },
+                'treat': { min: 0.0, max: 1.0 },
+                'offtrt': { min: 0.0, max: 1.0 },
+                'cd40': { min: 0.0, max: 1199.0 },
+                'cd420': { min: 49.0, max: 1119.0 },
+                'cd80': { min: 40.0, max: 5011.0 },
+                'cd820': { min: 124.0, max: 6035.0 },
+                'karnof': { min: 70.0, max: 100.0 },
+            };
 
-        // Convert inputs to tensor and make prediction
-        const normalizedInputs = normalizeData(inputs);
-        const inputTensor = tf.tensor([normalizedInputs]);
-        const prediction = model.predict(inputTensor);
+            function normalizeInput(input) {
+                return input.map((value, index) => {
+                    const param = Object.values(normalizationParams)[index];
+                    return (value - param.min) / (param.max - param.min);
+                });
+            }
+
+            // Convert inputs to tensor and make prediction
+        const normalizedInput = normalizeInput(inputs);
+        //const inputTensor = tf.tensor([inputs]);
+            const tensorInput = tf.tensor2d([normalizedInput]);
+        const prediction = model.predict(tensorInput);
         const probabilities = await prediction.data();
         const rawProbability = probabilities[0];
 
@@ -37,47 +57,12 @@ async function makePrediction() {
             <div class="mt-4 p-4 bg-gray-100 rounded">
                 <h3>Prediction Results:</h3>
                 <p class="text-lg"><strong>Survival Probability:</strong> ${survivalPercentage}%</p>
-                <p style="font-size: 10px">(Disclaimer: Please note that this model has an accuracy of approximately 70%).</p>
             </div>
-
         `;
 
         // Cleanup
-        inputTensor.dispose();
+        tensorInput.dispose();
         prediction.dispose();
-
-        async function runAllPredictions() {
-            const model = await loadModel();
-        
-            for (let i = 0; i < allInputs.length; i++) {
-                const inputTensor = tf.tensor([allInputs[i]]);
-                const prediction = model.predict(inputTensor);
-                const probabilities = await prediction.data();
-                const survivalPercentage = (probabilities[0] * 100).toFixed(2);
-                
-                predictions.push(survivalPercentage);
-                
-                // Cleanup
-                inputTensor.dispose();
-                prediction.dispose();
-            }
-            
-            return predictions;
-        }
-        
-        // Run predictions and log results
-
-        
-
-        runAllPredictions().then(results => {
-            console.log('Survival percentages:', results);
-            
-            // Optional: Display results with row numbers
-            results.forEach((prediction, index) => {
-                console.log(`Row ${index + 1}: ${prediction}%`);
-            });
-        });
-
 
     } catch (error) {
         console.error('Prediction error:', error);

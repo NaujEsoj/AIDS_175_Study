@@ -13,7 +13,7 @@
     <div>
       <h1>AIDS Treatment Decision Support System</h1>
     </div>
-    <form id="predictionForm" onsubmit="return false;">
+    <form id="predictionForm">
       <div class="input-group">
         <label for="trt">Treatment indicator:</label>
         <select id="trt" name="trt" required>
@@ -105,9 +105,9 @@
       </div>
       <div class="input-group">
         <label for="karnof">Karnofsky Score:</label>
-        <input type="number" min="1" max="99" id="karnof" name="karnof" required>
+        <input type="number" min="1" max="100" id="karnof" name="karnof" required>
       </div>
-      <button id="submitBtn" type="submit" onclick="makePrediction()">Submit</button>
+      <button id="submitBtn" type="button" onclick="makePrediction()">Submit</button>
   </form>
 
   <div id="predictionResult"></div>
