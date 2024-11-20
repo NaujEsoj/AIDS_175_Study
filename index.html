@@ -3,6 +3,7 @@
 <head>
     <title>HIV Treatment Decision Support System</title>
     <link rel="stylesheet" href="./style/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,12 +11,12 @@
   </head>
   <body>
     <div>
-      <h1>HIV Treatment Decision Support System</h1>
+      <h1>AIDS Treatment Decision Support System</h1>
     </div>
-    <form id="predictionForm">
+    <form id="predictionForm" onsubmit="return false;">
       <div class="input-group">
         <label for="trt">Treatment indicator:</label>
-        <select id="trt" name="trt">
+        <select id="trt" name="trt" required>
           <option value="0">ZDV only</option>
           <option value="1">ZDV + ddI</option>
           <option value="2">ZDV + Za</option>
@@ -24,89 +25,89 @@
       </div>
       <div class="input-group">
         <label for="age">Age:</label>
-        <input type="number" min="1" max="99" id="age" name="age">
+        <input type="number" min="1" max="99" id="age" name="age" required>
       </div>
       <div class="input-group">
         <label for="wtkg">Weight (In kilos):</label>
-        <input type="number" min="1" max="300" id="wtkg" name="wtkg">
+        <input type="number" min="1" max="300" id="wtkg" name="wtkg" required>
       </div>
       <div class="input-group">
         <label for="hemo">Hemophilia:</label>
-        <select id="hemo" name="hemo">
+        <select id="hemo" name="hemo" required>
           <option value="0">No</option>
           <option value="1">Yes</option>
         </select>
       </div>
       <div class="input-group">
         <label for="homo">Homosexual activity:</label>
-        <select id="homo" name="homo">
+        <select id="homo" name="homo" required>
           <option value="0">No</option>
           <option value="1">Yes</option>
         </select>
       </div>
       <div class="input-group">
         <label for="drugs">History of IV drug use:</label>
-        <select id="drugs" name="drugs">
+        <select id="drugs" name="drugs" required>
           <option value="0">No</option>
           <option value="1">Yes</option>
         </select>
       </div>
       <div class="input-group">
         <label for="race">Race:</label>
-        <select id="race" name="race">
+        <select id="race" name="race" required>
           <option value="0">White</option>
           <option value="1">Non White</option>
         </select>
       </div>
       <div class="input-group">
         <label for="gender">Gender:</label>
-        <select id="gender" name="gender">
+        <select id="gender" name="gender" required>
           <option value="0">Female</option>
           <option value="1">Male</option>
         </select>
       </div>
       <div class="input-group">
         <label for="str2">Antiretroviral history:</label>
-        <select id="str2" name="str2">
+        <select id="str2" name="str2" required>
           <option value="0">Naive</option>
           <option value="1">Experienced</option>
         </select>
       </div>
       <div class="input-group">
         <label for="treat">Treatment:</label>
-        <select id="treat" name="treat">
+        <select id="treat" name="treat" required>
           <option value="0">ZDV only</option>
           <option value="1">Others</option>
         </select>
       </div>
       <div class="input-group">
         <label for="offtrt">Off-trt before 96+/-5 weeks :</label>
-        <select id="offtrt" name="offtrt">
+        <select id="offtrt" name="offtrt" required>
           <option value="0">No</option>
           <option value="1">Yes</option>
         </select>
       </div>
       <div class="input-group">
         <label for="cd40">CD4 at baseline:</label>
-        <input type="number" min="0" max="9999" id="cd40" name="cd40">
+        <input type="number" min="0" max="9999" id="cd40" name="cd40" required>
       </div>
       <div class="input-group">
         <label for="cd420">CD4 at 20+/-5 weeks:</label>
-        <input type="number" min="0" max="9999" id="cd420" name="cd420">
+        <input type="number" min="0" max="9999" id="cd420" name="cd420" required>
       </div>
       <div class="input-group">
         <label for="cd80">CD8 at baseline:</label>
-        <input type="number" min="0" max="9999" id="cd80" name="cd80">
+        <input type="number" min="0" max="9999" id="cd80" name="cd80" required>
       </div>
       <div class="input-group">
         <label for="cd820">CD8 at 20+/-5 weeks:</label>
-        <input type="number" min="0" max="9999" id="cd820" name="cd820">
+        <input type="number" min="0" max="9999" id="cd820" name="cd820" required>
       </div>
       <div class="input-group">
         <label for="karnof">Karnofsky Score:</label>
-        <input type="number" min="1" max="99" id="karnof" name="karnof">
+        <input type="number" min="1" max="99" id="karnof" name="karnof" required>
       </div>
-      <button type="button" onclick="makePrediction()">Submit</button>
+      <button id="submitBtn" type="submit" onclick="makePrediction()">Submit</button>
   </form>
 
   <div id="predictionResult"></div>

@@ -17,7 +17,7 @@ form {
     gap: 40px;
     justify-content: center;
     border-radius: 15px;
-    width: 1000px;
+    width: 90%;
     margin: auto;
 }
 
@@ -60,8 +60,40 @@ button {
     cursor: pointer;
 }
 
+#predictionResult {
+    background-color: rgba(249, 249, 249, 0.8);
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px auto;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    text-align: center  ;
+}
+
 #result {
     margin-top: 20px;
     padding: 15px;
     border-radius: 5px;
 }
+
+@media (max-width: 1000px) {
+
+    body {
+        padding: 20px;
+    }
+
+    h1 {
+        margin: 60px 20px;
+    }
+
+    .input-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    form {
+        width: 75%;
+    }
+
+  }
